@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
+use \App\Http\Controllers\PostController;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 /*
@@ -19,12 +20,7 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 
 
-Route::get('/', function () {
-    return view('posts', [
-        'posts' => Post::latest()->get(),
-        'categories' => Category::all()
-    ]);
-})->name('home');
+Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::get('posts/{post:slug}', function(Post $post){
 
